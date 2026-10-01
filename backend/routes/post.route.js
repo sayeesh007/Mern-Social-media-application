@@ -1,22 +1,24 @@
 import express from 'express'
+import protectedRoute from '../middlewares/protectedRoute.js'
+import { commentOnPost, createPost, deletePost, getAllPosts, getFollowingPost, getLikedPosts, getUserSinglePost, likeUnlikePost } from '../controllers/post.controller.js'
 
 const router =  express.Router()
 
-router.get('/all')
+router.get('/all',protectedRoute,getAllPosts)
 
-router.get('/following')
+router.get('/following',protectedRoute,getFollowingPost)
 
-router.get('/likes/:id')
+router.get('/likes/:id',protectedRoute,getLikedPosts)
 
-router.get('/user/:username')
+router.get('/user/:username',protectedRoute,getUserSinglePost)
 
-router.post('/create')
+router.post('/create',protectedRoute,createPost)
 
-router.post('/like/:id')
+router.post('/like/:id',protectedRoute,likeUnlikePost)
 
-router.post('/comment/:id')
+router.post('/comment/:id',protectedRoute,commentOnPost)
 
-router.delete('/:id')
+router.delete('/:id',protectedRoute,deletePost)
 
 
 export default router
